@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription</title>
+</head>
+<body>
+    <div class="container">
+        <div class="form">
+            <form method="post" action="{% url 'inscription' %}">
+                {% csrf_token %}
+                <h1>Inscription</h1>
+
+                {% if form.errors %}
+                    <div class="error">
+                        <ul>
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            {% endfor %}
+                            {% for error in form.non_field_errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+
+                {{ form.as_p }}    
+                <button type="submit">S'inscrire</button>
+            </form>
+            <p class="link">Déjà inscrit ? <a href="{% url 'connexion' %}">Se connecter</a></p>
+        </div>      
+    </div>
+    <style>
+        /* CSS */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        h1 {
+            margin: 20px 0;
+            color: #fff;
+        }
+
+        body {
+            min-height: 100vh;
+            width: 100%;
+            background: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        p{
+            color:#fff;
+        }
+
+        .container {
+            width: 400px;
+            background: #000000;
+            border-radius: 7px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .container .form {
+            padding: 30px;
+        }
+
+        label {
+            padding: 10px 0;
+            color: #41bdee;
+            cursor: pointer;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            font-size: 17px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            outline: none;
+            margin-bottom: 15px;
+            margin-top: 10px;
+        }
+
+        a {
+            font-size: 16px;
+            color: #41bdee;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        button {
+            color: #fff;
+            background: #41bdee;
+            width: 100%;
+            padding: 10px;
+            font-size: 17px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 6px;
+            outline: none;
+        }
+
+        button:hover {
+            background: #3a9cc8; /* Changer la couleur au survol */
+        }
+
+        .link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .error {
+            background-color: rgb(255, 254, 254);
+            color: #fff;
+            border-radius: 6px;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 14px;      
+            text-align: center; 
+        }
+        ul {
+            list-style: none;
+            color: red;
+        }
+    </style>
+</body>
+</html>
+
+
