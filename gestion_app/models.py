@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+
+
 class Utilisateur(AbstractUser):
     USER_TYPE_CHOICES = (
         ('doctor', 'Médecin'),
@@ -13,11 +15,31 @@ class Utilisateur(AbstractUser):
         return self.username
 
 class Enfant(models.Model):
-    nom = models.CharField(max_length=50)
+    nom = models.CharField(max_length=50, blank=True, null=True)
     prenom = models.CharField(max_length=50, blank=True, null=True)  # Ajout du champ prénom
     age = models.IntegerField()
-    groupe_sanguin = models.CharField(max_length=3, blank=True, null=True)  # Ajout du champ groupe sanguin
-    statut = models.CharField(max_length=50, blank=True, null=True)  # Ajout du champ statut
+    SEXE_CHOICES = (
+        ('M', 'M'),
+        ('F', 'F'),
+    )
+    sexe = models.CharField(max_length=10, choices=  SEXE_CHOICES,blank=True, null=True) 
+    GROUPE_SANGUIN_CHOICES = (
+        ('A-', 'A-'),
+        ('A+', 'A+'),
+        ('B+', 'B+'),
+        ('B-', 'B-'),
+        ('AB+', 'AB+'),
+        ('AB-', 'AB-'),
+        ('O+', 'O+'),
+        ('O-', 'O-'),   
+    )
+    groupe_sanguin = models.CharField(max_length=10, choices=  GROUPE_SANGUIN_CHOICES,blank=True, null=True)  # Ajout du champ groupe sanguin
+    
+    STATUT_CHOICES = (
+        ('Diagnostic positif', 'Diagnostic positif'),
+        ('Exposition au VIH', 'Exposition au VIH'),
+    )
+    statut = models.CharField(max_length=20, choices=  STATUT_CHOICES, blank=True, null=True)
     utilisateur = models.ForeignKey(Utilisateur, on_delete=models.CASCADE)  # Lien avec le modèle Utilisateur
 
     def __str__(self):

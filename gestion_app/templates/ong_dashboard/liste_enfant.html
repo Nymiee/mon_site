@@ -1,16 +1,45 @@
+<!-- ong_dashboard/enfants_list.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Liste des Enfants</title>
 </head>
 <body>
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit" name="action" value="ajouter">Ajouter Enfant</button>
-        <button type="submit" name="action" value="liste">Liste Enfant</button>
-    </form>
+    <div class="container">
+        <h1>Liste des Enfants</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Âge</th>
+                    <th>Groupe Sanguin</th>
+                    <th>Statut</th>
+                    <th>Sexe</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for enfant in enfants %}
+                    <tr>
+                        <td>{{ enfant.prenom }}</td>
+                        <td>{{ enfant.nom }}</td>
+                        <td>{{ enfant.age }}</td>
+                        <td>{{ enfant.groupe_sanguin }}</td>
+                        <td>{{ enfant.statut }}</td>
+                        <td>{{ enfant.sexe }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="5">Aucun enfant trouvé.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'ajouter_enfant' %}">Ajouter un Enfant</a> <!-- Lien vers la page d'ajout -->
+    </div>
 </body>
 </html>
 
@@ -28,7 +57,7 @@
 
     h1 {
         margin: 20px 0;
-        color: #fff;
+        color: #000000;
     }
     body {
         min-height: 100vh;
@@ -40,8 +69,8 @@
     }
 
     .container {
-        width: 400px;
-        background: #000000;
+        width: 2000px;
+        background: #ffffff;
         border-radius: 7px;
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
     }
@@ -80,7 +109,7 @@
 
     button {
         color: #fff;
-        background:  #000000;
+        background:  #41bdee;
         width: 100%;
         padding: 10px;
         font-size: 17px;
@@ -110,4 +139,4 @@
     }
 </style>
 </body>
-</html
+</html>

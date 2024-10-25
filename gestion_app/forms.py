@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import Utilisateur, Enfant  # On importe bien le modèle Enfant
+from .models import Utilisateur, Enfant  
+
+
 
 class CustomUserCreationForm(UserCreationForm):
     user_type = forms.ChoiceField(
@@ -30,7 +32,7 @@ class CustomUserCreationForm(UserCreationForm):
 class EnfantForm(forms.ModelForm):  # On renomme correctement le formulaire
     class Meta:
         model = Enfant  # On utilise le modèle Enfant
-        fields = ['nom', 'prenom', 'age', 'groupe_sanguin', 'statut']  # Ajoute tous les champs requis
+        fields = ['nom', 'prenom', 'age', 'groupe_sanguin', 'statut','sexe']  # Ajoute tous les champs requis
 
     # Personnalisation des widgets avec placeholders et texte d'aide
     def __init__(self, *args, **kwargs):
@@ -39,10 +41,11 @@ class EnfantForm(forms.ModelForm):  # On renomme correctement le formulaire
         self.fields['prenom'].widget.attrs.update({'placeholder': 'Entrez le prénom'})
         self.fields['age'].widget.attrs.update({'placeholder': 'Entrez l\'âge'})
         self.fields['groupe_sanguin'].widget.attrs.update({'class': 'form-select'})
-        self.fields['statut'].widget.attrs.update({'class': 'form-select'})
+        self.fields['sexe'].widget.attrs.update({'class': 'form-select'})
 
         # Ajouter du texte d'aide
         self.fields['groupe_sanguin'].help_text = 'Sélectionnez le groupe sanguin.'
         self.fields['statut'].help_text = 'Indiquez le statut de l\'enfant.'
+        self.fields['sexe'].help_text = 'Selectionner le sexe.'
 
 

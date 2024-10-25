@@ -51,7 +51,34 @@ def doctor_dashboard(request):
 
 @login_required
 def ong_dashboard(request):
-    return render(request,'ong_dashboard/ong_dashboard.html')
+    if request.method == 'POST':
+        action = request.POST.get('action')
+        if action == 'ajouter':
+            return redirect('ajouter_enfant')  # URL nommée pour ajouter enfant
+        elif action == 'liste':
+            return redirect('liste_enfant')    # URL nommée pour liste enfant
+    return render(request, 'ong_dashboard/ong_dashboard.html')
+
+
+def ajouter_enfant(request):
+    if request.method == 'POST':
+        form = EnfantForm(request.POST)
+        if form.is_valid():
+            enfant = form.save(commit=False)  # Créez l'objet sans l'enregistrer dans la base de données
+            enfant.utilisateur = request.user  # Assignez l'utilisateur connecté
+            enfant.save()  # Ensuite, enregistrez l'objet dans la base de données
+            return redirect('ong_dashboard')  # Redirection vers le tableau de bord des ONG
+    else:
+        form = EnfantForm()  # Créez une nouvelle instance du formulaire
+
+    return render(request, 'ong_dashboard/ajouter_enfant.html', {'form': form})  # Affichez le formulaire
+
+
+
+
+def liste_enfant(request):
+    enfants = Enfant.objects.all()  
+    return render(request, 'ong_dashboard/liste_enfant.html', {'enfants': enfants})
 
 
   
