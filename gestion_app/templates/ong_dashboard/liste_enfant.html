@@ -8,12 +8,12 @@
 </head>
 <body>
     <div class="container">
-        <h1>Liste des Enfants</h1>
+        <h1>Listes des Enfants</h1>
         <table>
             <thead>
                 <tr>
-                    <th>Prénom</th>
                     <th>Nom</th>
+                    <th>Prénom</th>
                     <th>Âge</th>
                     <th>Groupe Sanguin</th>
                     <th>Statut</th>
@@ -24,8 +24,8 @@
             <tbody>
                 {% for enfant in enfants %}
                     <tr>
-                        <td>{{ enfant.prenom }}</td>
                         <td>{{ enfant.nom }}</td>
+                        <td>{{ enfant.prenom }}</td>
                         <td>{{ enfant.age }}</td>
                         <td>{{ enfant.groupe_sanguin }}</td>
                         <td>{{ enfant.statut }}</td>
@@ -58,6 +58,7 @@
     h1 {
         margin: 20px 0;
         color: #000000;
+        text-align: center;
     }
     body {
         min-height: 100vh;
@@ -65,7 +66,7 @@
         background: #ffffff;
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
     }
 
     .container {
@@ -75,28 +76,10 @@
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
     }
 
-    .container .form {
-        padding: 30px;
-    }
-
-    label {
-        padding: 10px 0;
-        color: #41bdee;
-        cursor: pointer;
-    }
-
-    input {
-        width: 100%;
-        padding: 10px;
-        font-size: 17px;
-        border: 1px solid #ddd;
-        border-radius: 6px;
-        outline: none;
-        margin-bottom: 15px;
-        margin-top: 10px;
-    }
 
     a {
+        padding: 10px 20px;     
+        border-radius: 5px; 
         font-size: 16px;
         color: #41bdee;
         text-decoration: none;
@@ -104,39 +87,46 @@
 
     a:hover {
         text-decoration: underline;
-        color: #fff;
+        color: #000000;
     }
 
-    button {
-        color: #fff;
-        background:  #41bdee;
-        width: 100%;
-        padding: 10px;
-        font-size: 17px;
-        margin-top: 10px;
-        border: none;
-        border-radius: 6px;
-        outline: none;
+   
+    div {
+        text-align: center;  
     }
 
-    button:hover {
-        background: #41bdee;
-    }
 
-    .link {
-        text-align: center;
+    table {
+        width: 80%;
+        margin: 0 auto;
+        border-collapse: collapse;
+        border: 1px solid #000000;
         margin-top: 20px;
     }
-
-    .error {
-        background-color: red;
-        color: #fff;
-        border-radius: 6px;
+  
+    th, td {
         padding: 10px;
-        margin-bottom: 10px;
-        font-size: 14px;
+        text-align: left;
+        border-bottom: 1px solid #000000;
+    }
+
+    th {
+        background-color: #41bdee;
+        font-weight: bold;
+    }
+
+
+    tr:hover {
+        background-color: #ec3333;
+    }
+
+    .link-container {
         text-align: center;
     }
+
+  
+
+   
 </style>
 </body>
 </html>
