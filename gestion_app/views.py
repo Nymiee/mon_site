@@ -64,24 +64,36 @@ def ajouter_enfant(request):
     if request.method == 'POST':
         form = EnfantForm(request.POST)
         if form.is_valid():
-            enfant = form.save(commit=False)  # Créez l'objet sans l'enregistrer dans la base de données
-            enfant.utilisateur = request.user  # Assignez l'utilisateur connecté
-            enfant.save()  # Ensuite, enregistrez l'objet dans la base de données
-            return redirect('ong_dashboard')  # Redirection vers le tableau de bord des ONG
+            enfant = form.save(commit=False)  # Crée l'objet enfant sans l'enregistrer immédiatement
+            enfant.utilisateur = request.user  # Associe l'enfant à l'utilisateur connecté
+            
+            # Vérifie que l'utilisateur connecté est bien une ONG avant d'assigner l'ONG
+            if request.user.user_type == 'ong':
+                enfant.ong = request.user  # Définit l'ONG comme l'utilisateur connecté
+            else:
+                return HttpResponse("Vous n'êtes pas autorisé à ajouter un enfant.")  # Gère les accès incorrects
+
+            enfant.save()  # Enregistre l'objet enfant dans la base de données
+            return redirect('ong_dashboard')  # Redirige vers le tableau de bord des ONG
     else:
-        form = EnfantForm()  # Créez une nouvelle instance du formulaire
+        form = EnfantForm()  # Crée une nouvelle instance du formulaire pour une requête GET
 
-    return render(request, 'ong_dashboard/ajouter_enfant.html', {'form': form})  # Affichez le formulaire
-
+    return render(request, 'ong_dashboard/ajouter_enfant.html', {'form': form})
 
 
 
 def liste_enfant(request):
-    enfants = Enfant.objects.all()  
+    if request.GET.get('mes_enfants') is not None:
+        enfants = Enfant.objects.filter(ong=request.user)
+        print("Enfants filtrés:", enfants)  # Débogage
+    else:
+        enfants = Enfant.objects.all()  # Récupérer tous les enfants
+        
     return render(request, 'ong_dashboard/liste_enfant.html', {'enfants': enfants})
 
+def rapport(request):
+    return render(request, 'ong_dashboard/rapport.html')
 
-  
 
 
 

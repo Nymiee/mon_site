@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth import get_user_model
+
 
 
 
@@ -39,8 +41,11 @@ class Enfant(models.Model):
         ('Diagnostic positif', 'Diagnostic positif'),
         ('Exposition au VIH', 'Exposition au VIH'),
     )
+
     statut = models.CharField(max_length=20, choices=  STATUT_CHOICES, blank=True, null=True)
     utilisateur = models.ForeignKey(Utilisateur, on_delete=models.CASCADE)  # Lien avec le modèle Utilisateur
+    ong = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="enfants")
+    inscrit_par = models.ForeignKey(Utilisateur, on_delete=models.CASCADE, related_name="enfants_inscrits", null=True, blank=True)
 
     def __str__(self):
         return f"{self.prenom} {self.nom}" if self.prenom else self.nom

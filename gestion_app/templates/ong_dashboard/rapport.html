@@ -1,51 +1,19 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste des Enfants</title>
+    <title>Rapport</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Liste des Enfants</h1>
-        <div>
-            <a href="{% url 'liste_enfant' %}">Voir tous les enfants</a> 
-            <a href="{% url 'liste_enfant' %}?mes_enfants=1">Voir mes enfants</a>
-            <a href="{% url 'ajouter_enfant' %}">Ajouter un enfant</a>
-        </div>
-          
-        <table>
-            <thead>
-                <tr>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>Âge</th>
-                    <th>Groupe Sanguin</th>
-                    <th>Statut</th>
-                    <th>Sexe</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for enfant in enfants %}
-                    <tr>
-                        <td>{{ enfant.nom }}</td>
-                        <td>{{ enfant.prenom }}</td>
-                        <td>{{ enfant.age }}</td>
-                        <td>{{ enfant.groupe_sanguin }}</td>
-                        <td>{{ enfant.statut }}</td>
-                        <td>{{ enfant.sexe }}</td>
-                    </tr>
-                {% empty %}
-                    <tr>
-                        <td colspan="6">Aucun enfant trouvé.</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+    <h1>Rapport des Statistiques</h1>
+    <ul>
+        <li>Nombre total d'enfants : {{ nombre_enfants }}</li>
+        <li>Nombre total d'ONG : {{ nombre_ongs }}</li>
+        <li>Nombre total de médecins : {{ nombre_medecins }}</li>
+    </ul>
 </body>
 </html>
-
 
 <style>
     /* CSS */
