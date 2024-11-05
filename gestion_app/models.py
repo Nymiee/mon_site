@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth import get_user_model
+from django.utils.timezone import now
 
 
 
@@ -46,8 +47,19 @@ class Enfant(models.Model):
     utilisateur = models.ForeignKey(Utilisateur, on_delete=models.CASCADE)  # Lien avec le modèle Utilisateur
     ong = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="enfants")
     inscrit_par = models.ForeignKey(Utilisateur, on_delete=models.CASCADE, related_name="enfants_inscrits", null=True, blank=True)
+    date_enregistrement = models.DateTimeField(default=now)
+    date_modification = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"{self.prenom} {self.nom}" if self.prenom else self.nom
 
 
+class ONG(models.Model):
+    nom = models.CharField(max_length=100)
+    date_enregistrement = models.DateField()
+    date_modification = models.DateTimeField(auto_now=True)
+
+class Medecin(models.Model):
+    nom = models.CharField(max_length=100)
+    specialite = models.CharField(max_length=100)
+    date_enregistrement = models.DateField()

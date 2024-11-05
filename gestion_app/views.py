@@ -3,7 +3,16 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm, EnfantForm
-from .models import Enfant
+from .models import Enfant , ONG, Medecin
+from django.http import HttpResponse
+from django.utils import timezone
+from .models import Utilisateur
+
+
+
+
+
+
 
 # Vue pour l'inscription
 def inscription(request):
@@ -91,16 +100,29 @@ def liste_enfant(request):
         
     return render(request, 'ong_dashboard/liste_enfant.html', {'enfants': enfants})
 
+
 def rapport(request):
-    return render(request, 'ong_dashboard/rapport.html')
-
-
-
+    total_enfants = Enfant.objects.count()
+    total_medecins = Utilisateur.objects.filter(user_type='Medecin').count()
+    total_ongs = Utilisateur.objects.filter(user_type='ong').count()
+    
+    context = {
+        'total_enfants': total_enfants,
+        'total_medecins': total_medecins,
+        'total_ongs': total_ongs,
+    }
+    return render(request, 'ong_dashboard/rapport.html', context)
 
 # Vue pour la déconnexion
 def deconnexion(request):
     logout(request)
     messages.success(request, 'Vous êtes déconnecté avec succès.')
     return redirect('connexion')
+
+
+
+
+
+
 
 

@@ -3,17 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rapport</title>
+    <title>Rapport General</title>
 </head>
 <body>
-    <h1>Rapport des Statistiques</h1>
-    <ul>
-        <li>Nombre total d'enfants : {{ nombre_enfants }}</li>
-        <li>Nombre total d'ONG : {{ nombre_ongs }}</li>
-        <li>Nombre total de médecins : {{ nombre_medecins }}</li>
-    </ul>
+    <div class="container">
+        <h1>Rapport General</h1>
+
+
+      <table class="container">
+         <thead>
+              <tr>
+                 <th>Statistique</th>
+                 <th>Valeur</th>
+              </tr>
+         </thead>
+         <tbody>
+              <tr>
+                 <td>Nombre total d'enfant</td>
+                 <td>{{ total_enfants }}</td>
+             </tr>
+              <tr>
+                 <td>Nombre total d'ONG</td>
+                 <td>{{ total_ongs }}</td>
+              </tr>
+              <tr>
+                 <td>Nombre total de médecin</td>
+                 <td>{{ total_medecins }}</td>
+              </tr>
+
+            </tbody>
+
+        </table>
+  </div>
+   
 </body>
 </html>
+
 
 <style>
     /* CSS */
@@ -42,23 +67,9 @@
     }
 
     .container {
-        width: 2000px;
+        width: 1000px;
         background: #ffffff;
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-    }
-
-
-    a {
-        padding: 10px 20px;     
-        border-radius: 5px; 
-        font-size: 16px;
-        color: #41bdee;
-        text-decoration: none;
-    }
-
-    a:hover {
-        text-decoration: underline;
-        color: #000000;
     }
 
    
@@ -94,9 +105,6 @@
     .link-container {
         text-align: center;
     }
+</style>  
 
-  
-
-   
-</style>
 
