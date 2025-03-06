@@ -4,9 +4,11 @@ from django.conf import settings
 from gestion_app import views  
 
 urlpatterns = [
-
-    path('', views.inscription, name='inscription'), 
-    path('connexion/', views.connexion, name='connexion'),  
+    path('', views.index, name='index'),  
+    path('inscription', views.inscription, name='inscription'),
+    path('apropos', views.apropos, name='apropos'), 
+    path('contact', views.contact, name='contact'), 
+    path('connexion/', views.connexion, name='connexion'),
     path('doctor_dashboard/', views.doctor_dashboard, name='doctor_dashboard'), 
     path('ong_dashboard/', views.ong_dashboard, name='ong_dashboard'), 
     path('ong_dashboard/ajouter_enfant', views.ajouter_enfant, name='ajouter_enfant'),

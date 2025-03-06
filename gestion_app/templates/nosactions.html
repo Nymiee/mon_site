@@ -1,0 +1,370 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - ONG Impact</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'img/logo2.png' %}">
+
+    <style>
+        /* Styles Généraux */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: #f5f7fa;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 1px 5%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
+        }
+
+        header img {
+            height: 50px;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #007bff;
+        }
+        
+        /* Section Hero */
+        .hero {
+            height: 85vh;
+            background-image: url("{% static 'img/R.jpeg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Overlay pour rendre le texte plus lisible */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content {
+            position: relative;
+            color: white;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+
+
+        button {
+            background-color: #4CAF50; /* Vert */
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Au survol */
+        button:hover {
+           background-color: #45a049; /* Vert plus foncé */
+           transform: scale(1.05); /* Agrandir légèrement le bouton */
+        }
+
+        /* Au focus */
+        button:focus {
+           outline: none; /* Retirer la bordure de focus par défaut */
+           box-shadow: 0 0 5px rgba(0, 128, 0, 0.8); /* Ajoute une ombre verte */
+        }
+
+        .Nous-section {
+           display: flex;
+           justify-content: flex-start; /* Aligner à gauche */
+           align-items: center; /* Aligner verticalement au centre */
+           padding: 50px 5%;
+           background: #56789c; /* Couleur de fond bleu */
+           border-radius: 15px;
+           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+           margin: 30px auto;
+           width: 100%;
+           max-width: 1200px; /* Limite la largeur pour éviter que ce soit trop large */
+        }
+
+        .Nous-section:hover {
+            transform: scale(1.02);
+        }
+
+        .nous-content {
+           width: 100%; /* Prend toute la largeur disponible */
+           color: white;
+           display: flex;
+           align-items: center; /* Aligner le texte verticalement */
+        }
+
+        .Nous-section h2 {
+           font-size: 1.8em; /* Taille réduite pour le titre */
+           font-weight: bold;
+           margin-right: 20px; /* Espace entre le titre et le texte */
+           text-transform: uppercase;
+           letter-spacing: 1px;
+        }
+
+        .Nous-section p {
+           font-size: 0.95em; /* Texte plus petit */
+           line-height: 1.6;
+           font-weight: 300;
+           color: #f4f4f4; /* Texte clair pour un bon contraste */
+        }
+
+        @media screen and (max-width: 768px) {
+       .Nous-section {
+          padding: 30px 5%;
+          flex-direction: column;
+          justify-content: center; /* Aligner le texte verticalement en mobile */
+        }
+
+        .nous-content {
+           width: 100%;
+        }
+
+        .Nous-section h2 {
+          font-size: 1.5em;
+        }
+
+        .Nous-section p {
+          font-size: 0.9em;
+        }
+        }
+
+
+        /* Section Actions */
+        .actions {
+            display: flex;
+            justify-content: space-around;
+            padding: 50px;
+        }
+
+        .action-box {
+            width: 30%;
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2px;
+        }
+
+        .action-box img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .don-section {
+            text-align: center;
+            padding: 50px;
+            background: #56789c;
+            border-radius: 1px;
+            margin: 3px auto;
+            width: 100%;
+            height: 250px;
+            box-shadow: 0 4px 6px rgb(19, 18, 18);
+        }
+        .don-section button {
+            margin-top: 2px;
+            padding: 15px 25px;
+            font-size: 18px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .don-section button:hover {
+            background-color: #218838;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            padding: 40px 5%;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .footer-section {
+            width: 30%;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 15px;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section ul li a:hover {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="{% static 'img/logo1.png' %}" alt="Logo ONG">
+    <h2>ONG Coeur Enfant</h2>
+    <nav>
+        <ul>
+            <li><a href="#">Accueil</a></li>
+            <li><a href="#">Nos Actions</a></li>
+            <li><a href="apropos.html">À propos</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Ensemble, changeons le monde</h1>
+        <p>Rejoignez notre mission pour un avenir meilleur.</p>
+        <form action="{% url 'connexion' %}" method="get">
+            <button type="submit">Rejoignez-nous</button>
+        </form>
+    </div>
+</section>
+<section class="actions">
+    <div class="action-box">
+        <h1>Notre Mission</h1>
+        <img src="{% static 'img/action 1.jpeg' %}" alt="Action 1">
+        <p>Notre mission est de venir en aide aux enfants et orphelins affectés par le VIH/SIDA, en leur 
+            fournissant un accès à des soins médicaux de qualité, à des traitements adaptés et à un soutien psychosocial.
+             Nous travaillons en partenariat avec des professionnels de santé et des institutions pour assurer leur bien-être 
+             et leur avenir. En plus de cela, nous nous engageons à recenser et à documenter
+             les enfants vulnérables afin de mieux répondre à leurs besoins spécifiques </p>
+    </div>
+    <div class="action-box">
+        <h1> Notre Vision</h1>
+        <img src="{% static 'img/action 2.jpeg' %}" alt="Action 2">
+        <p>Nous rêvons d'un monde où chaque enfant, quel que soit son statut sérologique, a accès aux soins, à l'éducation et à l'espoir d'un avenir meilleur. Notre vision est de construire un réseau mondial d'aide et de soutien, d'encourager les dons et de mobiliser les communautés pour que personne ne soit laissé pour compte dans la lutte contre le VIH/SIDA </p>
+    </div>
+    <div class="action-box">
+        <h1> Nos defis</h1>
+        <img src="{% static 'img/action 3.jpeg' %}" alt="Action 3">
+        <p>Le VIH/SIDA continue de faire de nombreuses victimes parmi les plus jeunes et les plus vulnérables. Le manque de ressources financières, la stigmatisation et l'accès limité aux soins restent des défis majeurs. Nous faisons face à des obstacles logistiques dans la collecte des données et la distribution des médicaments. Cependant, chaque défi nous motive davantage à trouver des solutions innovantes pour améliorer la vie des enfants et orphelins affectés par cette maladie </p>
+    </div>
+</section>
+
+<section class="actions">
+    <div class="action-box">
+        <h1>Notre Mission</h1>
+        <img src="{% static 'img/action 1.jpeg' %}" alt="Action 1">
+        <p>Notre mission est de venir en aide aux enfants et orphelins affectés par le VIH/SIDA, en leur 
+            fournissant un accès à des soins médicaux de qualité, à des traitements adaptés et à un soutien psychosocial.
+             Nous travaillons en partenariat avec des professionnels de santé et des institutions pour assurer leur bien-être 
+             et leur avenir. En plus de cela, nous nous engageons à recenser et à documenter
+             les enfants vulnérables afin de mieux répondre à leurs besoins spécifiques </p>
+    </div>
+    <div class="action-box">
+        <h1> Notre Vision</h1>
+        <img src="{% static 'img/action 2.jpeg' %}" alt="Action 2">
+        <p>Nous rêvons d'un monde où chaque enfant, quel que soit son statut sérologique, a accès aux soins, à l'éducation et à l'espoir d'un avenir meilleur. Notre vision est de construire un réseau mondial d'aide et de soutien, d'encourager les dons et de mobiliser les communautés pour que personne ne soit laissé pour compte dans la lutte contre le VIH/SIDA </p>
+    </div>
+    <div class="action-box">
+        <h1> Nos defis</h1>
+        <img src="{% static 'img/action 3.jpeg' %}" alt="Action 3">
+        <p>Le VIH/SIDA continue de faire de nombreuses victimes parmi les plus jeunes et les plus vulnérables. Le manque de ressources financières, la stigmatisation et l'accès limité aux soins restent des défis majeurs. Nous faisons face à des obstacles logistiques dans la collecte des données et la distribution des médicaments. Cependant, chaque défi nous motive davantage à trouver des solutions innovantes pour améliorer la vie des enfants et orphelins affectés par cette maladie </p>
+    </div>
+</section>
+
+<section class="don-section">
+    <h2>Vous pouvez faire un don</h2>
+    <p>Votre générosité peut offrir un avenir meilleur aux enfants vulnérables. Chaque don, petit ou grand, a un impact direct sur leur vie, leur permettant d'accéder à des soins médicaux, à l'éducation et au soutien nécessaire pour surmonter les défis auxquels ils font face. Ensemble, nous pouvons changer des vies et offrir un espoir concret aux enfants touchés par le VIH/SIDA</p>
+    <button>Faire un don</button>
+</section>
+
+<footer>
+    <div class="footer-section">
+        <h3>À Propos</h3>
+        <p>Nous œuvrons pour améliorer la condition de vie des enfants atteints du VIH/SIDA.</p>
+    </div>
+    <div class="footer-section">
+        <h3>Liens Utiles</h3>
+        <ul>
+            <li><a href="#">Accueil</a></li>
+            <li><a href="#">Nos Actions</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Faire un Don</a></li>
+        </ul>
+    </div>
+    <div class="footer-section">
+        <h3>Contact</h3>
+        <p>Email : ongcoeurenfant@gmail.com</p>
+        <p>Téléphone : +225 07 10 01 88 19</p>
+    </div>
+</footer>
+
+</body>
+</html>

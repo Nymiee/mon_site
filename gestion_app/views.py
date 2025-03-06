@@ -8,12 +8,6 @@ from django.http import HttpResponse
 from django.utils import timezone
 from .models import Utilisateur
 
-
-
-
-
-
-
 # Vue pour l'inscription
 def inscription(request):
     if request.method == 'POST':
@@ -66,6 +60,8 @@ def ong_dashboard(request):
             return redirect('ajouter_enfant')  # URL nommée pour ajouter enfant
         elif action == 'liste':
             return redirect('liste_enfant')    # URL nommée pour liste enfant
+        elif action == 'rapport':
+            return redirect ('rapport')
     return render(request, 'ong_dashboard/ong_dashboard.html')
 
 
@@ -118,6 +114,16 @@ def deconnexion(request):
     logout(request)
     messages.success(request, 'Vous êtes déconnecté avec succès.')
     return redirect('connexion')
+
+def index(request):
+    return render(request,'index.html')
+
+
+def apropos(request):
+    return render(request,'apropos.html')
+
+def contact(request):
+    return render(request,'contact.html')
 
 
 
