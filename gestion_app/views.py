@@ -2,11 +2,15 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import CustomUserCreationForm, EnfantForm
-from .models import Enfant , ONG, Medecin
+from .forms import CustomUserCreationForm, EnfantForm, DonForm
+from .models import Enfant , ONG, Medecin ,Don
 from django.http import HttpResponse
 from django.utils import timezone
 from .models import Utilisateur
+from django.template.loader import render_to_string
+from xhtml2pdf import pisa
+import pandas as pd
+
 
 # Vue pour l'inscription
 def inscription(request):
@@ -119,6 +123,10 @@ def index(request):
     return render(request,'index.html')
 
 
+def nosactions(request):
+    return render(request,'nosactions.html')
+    
+    
 def apropos(request):
     return render(request,'apropos.html')
 
@@ -126,9 +134,39 @@ def contact(request):
     return render(request,'contact.html')
 
 
+def merci(request):
+    return render(request, 'merci.html')
 
 
+def don(request):
+    if request.method == 'POST':
+        form = DonForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('merci')  # Redirige vers une page de remerciement
+    else:
+        form = DonForm()
+    return render(request, 'don.html', {'form': form})
 
 
+# PDF Export
+def export_pdf(request):
+    dons = Don.objects.all()
+    html = render_to_string('export_pdf.html', {'don': don})
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="listedon.pdf"'
+    pisa.CreatePDF(html, dest=response)
+    return response
+
+def listedon(request):
+    don = Don.objects.all().order_by('date_don')
+    return render(request, 'listedon.html', {'don': don})
 
 
+def export_enfant(request):
+    enfants = Enfant.objects.all()
+    html = render_to_string('export_enfant.html', {'enfants': enfants})
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="liste_enfant.pdf"'
+    pisa.CreatePDF(html, dest=response)
+    return response

@@ -1,134 +1,193 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste des Enfants</title>
-</head>
-<body>
-    <div class="container">
-        <h1>Liste des Enfants</h1>
-        <div>
-            <a href="{% url 'liste_enfant' %}">Voir tous les enfants</a> 
-            <a href="{% url 'liste_enfant' %}?mes_enfants=1">Voir mes enfants</a>
-            <a href="{% url 'ajouter_enfant' %}">Ajouter un enfant</a>
-        </div>
-          
-        <table>
-            <thead>
-                <tr>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>Âge</th>
-                    <th>Groupe Sanguin</th>
-                    <th>Statut</th>
-                    <th>Sexe</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for enfant in enfants %}
-                    <tr>
-                        <td>{{ enfant.nom }}</td>
-                        <td>{{ enfant.prenom }}</td>
-                        <td>{{ enfant.age }}</td>
-                        <td>{{ enfant.groupe_sanguin }}</td>
-                        <td>{{ enfant.statut }}</td>
-                        <td>{{ enfant.sexe }}</td>
-                    </tr>
-                {% empty %}
-                    <tr>
-                        <td colspan="6">Aucun enfant trouvé.</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</body>
-</html>
-
-
-<style>
-    /* CSS */
-    /* Import Google font - Poppins */
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Liste des Enfants - Version Bleue Améliorée</title>
+  <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
     * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
     }
 
-    h1 {
-        margin: 20px 0;
-        color: #000000;
-        text-align: center;
-    }
     body {
-        min-height: 100vh;
-        width: 100%;
-        background: #ffffff;
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #d0f0ff, #ffffff);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 30px 10px;
     }
 
     .container {
-        width: 2000px;
-        background: #ffffff;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+      width: 90%;
+      max-width: 1200px;
+      background: #ffffff;
+      padding: 25px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      border-radius: 20px;
+      border: 3px solid #b3e0ff;
+      animation: fadeIn 1.2s ease;
     }
 
-
-    a {
-        padding: 10px 20px;     
-        border-radius: 5px; 
-        font-size: 16px;
-        color: #41bdee;
-        text-decoration: none;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    a:hover {
-        text-decoration: underline;
-        color: #000000;
-    }
-
-   
-    div {
-        text-align: center;  
-    }
-
-
-    table {
-        width: 80%;
-        margin: 0 auto;
-        border-collapse: collapse;
-        border: 1px solid #000000;
-        margin-top: 20px;
-    }
-  
-    th, td {
-        padding: 10px;
-        text-align: left;
-        border-bottom: 1px solid #000000;
-    }
-
-    th {
-        background-color: #41bdee;
-        font-weight: bold;
-    }
-
-
-    tr:hover {
-        background-color: #ec3333;
+    h1 {
+      color: #007acc;
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 25px;
     }
 
     .link-container {
-        text-align: center;
+      text-align: center;
+      margin-bottom: 30px;
     }
 
-  
+    .link-container a {
+      display: inline-block;
+      padding: 10px 18px;
+      margin: 0 10px 10px 10px;
+      border-radius: 8px;
+      font-size: 16px;
+      background-color: #3399ff;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      transition: 0.3s;
+      border: 2px solid #66ccff;
+    }
 
-   
-</style>
+    .link-container a:hover {
+      background-color: #66ccff;
+      color: #000;
+      border-color: #99ddff;
+    }
 
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      animation: slideIn 1.2s ease;
+      border: 2px solid #3399ff;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    thead th {
+      background-color: #3399ff;
+      color: white;
+      text-transform: uppercase;
+      border: 1px solid #3399ff;
+      padding: 12px;
+    }
+
+    tbody td {
+      padding: 12px;
+      border: 1px solid #3399ff;
+      font-size: 15px;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #f0faff;
+    }
+
+    tbody tr:nth-child(odd) {
+      background-color: #ffffff;
+    }
+
+    tbody tr:hover {
+      background-color: #cceeff;
+    }
+
+    .bottom-buttons {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .export-btn {
+      display: inline-block;
+      margin: 0 10px;
+      padding: 10px 18px;
+      background-color: #3399ff;
+      color: white;
+      text-decoration: none;
+      border: 2px solid #66ccff;
+      font-weight: bold;
+      border-radius: 8px;
+      transition: 0.3s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .export-btn:hover {
+      background-color: #66ccff;
+      color: #000;
+      border-color: #99ddff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Liste des Enfants</h1>
+
+    <div class="link-container">
+      <a href="{% url 'liste_enfant' %}">Voir tous les enfants</a>
+      <a href="{% url 'liste_enfant' %}?mes_enfants=1">Voir mes enfants</a>
+      <a href="{% url 'ajouter_enfant' %}">Ajouter un enfant</a>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Âge</th>
+          <th>Statut</th>
+          <th>Groupe Sanguin</th>
+          <th>Stade</th>
+          <th>Sexe</th>
+          <th>Pays</th>
+          <th>Ville</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for enfant in enfants %}
+          <tr>
+            <td>{{ enfant.nom }}</td>
+            <td>{{ enfant.prenom }}</td>
+            <td>{{ enfant.age }}</td>
+            <td>{{ enfant.statut }}</td>
+            <td>{{ enfant.groupe_sanguin }}</td>
+            <td>{{ enfant.stade }}</td>
+            <td>{{ enfant.sexe }}</td>
+            <td>{{ enfant.pays }}</td>
+            <td>{{ enfant.ville }}</td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="9" style="text-align:center;">Aucun enfant trouvé.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="bottom-buttons">
+      <a href="{% url 'export_enfant' %}" class="export-btn">Exporter en PDF</a>
+      <a href="{% url 'index' %}" class="export-btn">Retour à l'accueil</a>
+    </div>
+  </div>
+
+</body>
+</html>

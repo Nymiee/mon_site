@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: Arial, sans-serif; font-size: 12px; margin: 0; padding: 0; }
+    h2 { text-align: center; margin-bottom: 20px; font-size: 18px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #aaa; padding: 8px; text-align: left; font-size: 14px; }
+    th { background-color: #f2f2f2; }
+    tbody tr:nth-child(even) { background-color: #f9f9f9; }
+  </style>
+</head>
+<body>
+  <h2>🌟 Liste des Enfants 🎁</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Âge</th>
+        <th>Statut</th>
+        <th>Groupe Sanguin</th>
+        <th>Stade</th>
+        <th>Sexe</th>
+        <th>Pays</th>
+        <th>Ville</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for enfant in enfants %}
+      <tr>
+        <td>{{ enfant.nom }}</td>
+        <td>{{ enfant.prenom }}</td>
+        <td>{{ enfant.age }}</td>
+        <td>{{ enfant.statut }}</td>
+        <td>{{ enfant.groupe_sanguin }}</td>
+        <td>{{ enfant.stade }}</td>
+        <td>{{ enfant.sexe }}</td>
+        <td>{{ enfant.pays }}</td>
+        <td>{{ enfant.ville }}</td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="9" style="text-align: center;">Aucun enfant trouvé</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>

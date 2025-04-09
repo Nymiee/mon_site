@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body { font-family: Arial, sans-serif; font-size: 12px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #aaa; padding: 8px; text-align: left; }
+    th { background-color: #f2f2f2; }
+    h2 { text-align: center; }
+  </style>
+</head>
+<body>
+  <h2>🌟 Liste des Dons 🎁</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Email</th>
+        <th>Montant</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for don in dons %}
+      <tr>
+        <td>{{ don.nom }}</td>
+        <td>{{ don.email }}</td>
+        <td>{{ don.montant }} FCFA</td>
+        <td>{{ don.date|date:"d/m/Y H:i" }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>

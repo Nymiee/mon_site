@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faire un Don</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #41bdee, #00b3b3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .don-container {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .don-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .input-group i {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            color: #41bdee;
+        }
+
+        .input-group input,
+        .input-group select,
+        .input-group textarea {
+            width: 100%;
+            padding: 12px 12px 12px 38px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background: #f5faff;
+            font-size: 15px;
+            color: #333;
+        }
+
+        .input-group textarea {
+            resize: vertical;
+            height: 100px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #41bdee;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #007d99;
+        }
+
+        .success-message {
+            text-align: center;
+            color: green;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="don-container">
+        <h2><i class="fas fa-hand-holding-heart"></i> Faire un Don</h2>
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                {{ form.nom }}
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                {{ form.email }}
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-coins"></i>
+                {{ form.montant }}
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-credit-card"></i>
+                {{ form.moyen_paiement }}
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-comment-dots"></i>
+                {{ form.message }}
+            </div>
+
+            <button type="submit"><i class="fas fa-heart"></i> Donner maintenant</button>
+        </form>
+    </div>
+</body>
+</html>

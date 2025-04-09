@@ -1,11 +1,190 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Enfants VIH</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #41bdee, #00b3b3);
+      min-height: 100vh;
+      display: flex;
+    }
+
+    .sidebar {
+      width: 260px;
+      background: #fff;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+      padding: 30px 20px;
+      position: fixed;
+      height: 100vh;
+      border-top-right-radius: 40px;
+      border-bottom-right-radius: 40px;
+    }
+
+    .sidebar h2 {
+      font-size: 22px;
+      color: #41bdee;
+      margin-bottom: 40px;
+      font-weight: 600;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 12px 20px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      color: #333;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .sidebar a:hover {
+      background-color: #41bdee;
+      color: white;
+    }
+
+    .main {
+      margin-left: 280px;
+      padding: 40px;
+      flex: 1;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      font-size: 32px;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .logout-btn {
+      background: #ff003c;
+      border: none;
+      padding: 10px 20px;
+      color: white;
+      font-weight: 500;
+      border-radius: 8px;
+      transition: 0.3s;
+      text-decoration: none;
+    }
+
+    .logout-btn:hover {
+      background: #000000;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-bottom: 50px;
+    }
+
+    .card-box {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: 0.3s ease;
+    }
+
+    .card-box:hover {
+      transform: translateY(-10px);
+    }
+
+    .card-box h3 {
+      font-size: 18px;
+      color: #41bdee;
+      margin-bottom: 10px;
+    }
+
+    .card-box p {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .chart-section {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .chart-section h3 {
+      font-size: 22px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .chart-placeholder {
+      background: #f4f4f4;
+      height: 250px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #aaa;
+      font-size: 16px;
+    }
+  </style>
 </head>
 <body>
-    
+
+  <div class="sidebar">
+    <h2>DOCTEURS</h2>
+    <a href="{% url 'ong_dashboard' %}">Dashboard</a>
+    <a href="{% url 'ajouter_enfant' %}">Ajouter un enfant</a>
+    <a href="{% url 'liste_enfant' %}">Liste des enfants</a>
+    <a href="{% url 'listedon' %}">Liste des dons</a>
+    <a href="{% url 'rapport' %}">Rapport</a>
+  </div>
+
+  <div class="main">
+    <div class="header">
+      <h1>Tableau de bord</h1>
+      <a href="{% url 'index' %}" class="logout-btn">Déconnexion</a>
+    </div>
+
+    <div class="cards">
+      <div class="card-box">
+        <h3>Enfants enregistrés</h3>
+        <p>120</p>
+      </div>
+      <div class="card-box">
+        <h3>Dons reçus</h3>
+        <p>85</p>
+      </div>
+      <div class="card-box">
+        <h3>Médecins bénévoles</h3>
+        <p>18</p>
+      </div>
+      <div class="card-box">
+        <h3>Cas stabilisés</h3>
+        <p>62</p>
+      </div>
+    </div>
+
+    <div class="chart-section">
+      <h3>Évolution des dons</h3>
+      <div class="chart-placeholder">Graphique en attente</div>
+    </div>
+  </div>
+
 </body>
 </html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Merci pour votre don</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #41bdee, #00b3b3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .merci-container {
+            background: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 450px;
+            width: 100%;
+        }
+
+        .merci-container i {
+            font-size: 60px;
+            color: #41bdee;
+            margin-bottom: 20px;
+        }
+        .marie i {
+            color: #fff;
+        }
+
+        .merci-container h2 {
+            color: #333;
+            font-size: 26px;
+            margin-bottom: 15px;
+        }
+
+        .merci-container p {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .merci-container a {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #41bdee;
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .merci-container a:hover {
+            background: #007d99;
+        }
+    </style>
+</head>
+<body>
+    <div class="merci-container">
+        <i class="fas fa-heart-circle-check"></i>
+        <h2>Merci pour votre générosité </h2>
+        <p>Votre don fait une réelle différence dans la vie des enfants que nous aidons. Que Dieu vous bénisse abondamment </p>
+      <div class="marie">
+         <a href="{% url 'index' %}"><i class="fas fa-arrow-left"></i> Retour à l'accueil</a>
+      </div>
+    </div>
+</body>
+</html>

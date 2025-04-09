@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rapport Général</title>
+  <meta charset="UTF-8">
+  <title>Liste des Dons</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
-    <!-- Google Font - Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <style>
-        
     * {
       margin: 0;
       padding: 0;
@@ -68,7 +64,6 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.15);
       transition: 0.3s;
       border: 2px solid #66ccff;
-
     }
 
     .link-container a:hover {
@@ -102,6 +97,7 @@
       padding: 12px;
       border: 1px solid #3399ff;
       font-size: 15px;
+      text-align: center; /* Centrer le texte des cellules */
     }
 
     tbody tr:nth-child(even) {
@@ -140,41 +136,60 @@
       color: #000;
       border-color: #99ddff;
     }
-
-    </style>
+    .retour-btn{
+      display: inline-block;
+      margin: 0 10px;
+      padding: 10px 18px;
+      background-color: #3399ff;
+      color: white;
+      text-decoration: none;
+      border: 2px solid #66ccff;
+      font-weight: bold;
+      border-radius: 8px;
+      transition: 0.3s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .export-btn:hover{
+       background-color: #66ccff;
+       color: #000;
+       border-color: #99ddff;
+    }
+  </style>
 </head>
 <body>
-
-<div class="container">
-    <h1>Rapport Général</h1>
-
-    <table>
+  <div class="animated-background"></div>
+  <div class="container">
+    <div class="card">
+      <h1>Liste des Dons</h1>
+      <table>
         <thead>
-            <tr>
-                <th>Statistique</th>
-                <th>Valeur</th>
-            </tr>
+          <tr>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Montant</th>
+            <th>Date</th>
+          </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Nombre total d'enfants</td>
-                <td>{{ total_enfants }}</td>
-            </tr>
-            <tr>
-                <td>Nombre total d'ONG</td>
-                <td>{{ total_ongs }}</td>
-            </tr>
-            <tr>
-                <td>Nombre total de médecins</td>
-                <td>{{ total_medecins }}</td>
-            </tr>
+          {% for don in dons %}
+          <tr>
+            <td>{{ don.nom }}</td>
+            <td>{{ don.email }}</td>
+            <td>{{ don.montant }} FCFA</td>
+            <td>{{ don.date|date:"d M Y H:i" }}</td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="4" style="text-align:center;">Aucun don pour l'instant</td>
+          </tr>
+          {% endfor %}
         </tbody>
-    </table>
-
-    <div class="link-container">
-        <a href="{%url 'index' %}">Retour à la page d'accueil</a>
+      </table>
+      <div style="text-align: center; margin-bottom: 20px;">
+        <a href="{% url 'export_pdf' %}" class="export-btn">Exporter en PDF</a>
+        <a href="{% url 'index' %}" class="retour-btn">Retour à l'accueil</a>
+      </div>
     </div>
-</div>
-
+  </div>
 </body>
 </html>
